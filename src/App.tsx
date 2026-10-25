@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState } from 'react';
 import { EmberlineHero } from './components/EmberlineHero';
 import { PlainWordsStrip } from './components/PlainWordsStrip';
 import { TheProblemSection } from './components/TheProblemSection';
@@ -10,8 +11,13 @@ import { TheFixSection } from './components/TheFixSection';
 import { CaliforniaSection } from './components/CaliforniaSection';
 import { ProofSection } from './components/ProofSection';
 import { Footer } from './components/Footer';
+import regionsData from './data/regions.json';
+
+export type RegionId = 'california_west_us' | 'amazon' | 'australia' | 'canada_boreal';
 
 export default function App() {
+  const [selectedRegion, setSelectedRegion] = useState<RegionId>('california_west_us');
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -19,12 +25,17 @@ export default function App() {
     }
   };
 
+  const activeRegionObj =
+    regionsData.regions.find((r) => r.id === selectedRegion) || regionsData.regions[0];
+
   return (
     <div className="min-h-screen bg-[#0A0A0C] text-[#F2EFE9] flex flex-col font-sans antialiased selection:bg-[#FC5000] selection:text-white">
-      
       <main className="flex-1 w-full">
         {/* Section 1: Hero */}
         <EmberlineHero
+          selectedRegion={selectedRegion}
+          onSelectRegion={setSelectedRegion}
+          activeRegionName={activeRegionObj.name}
           onExploreClick={() => scrollTo('the-fix')}
           onMethodClick={() => scrollTo('the-problem')}
           onCaliforniaClick={() => scrollTo('california')}
@@ -35,21 +46,32 @@ export default function App() {
         <PlainWordsStrip />
 
         {/* Section 2: The Problem */}
-        <TheProblemSection />
+        <TheProblemSection
+          selectedRegion={selectedRegion}
+          onSelectRegion={setSelectedRegion}
+        />
 
-        {/* Section 3: The Fix (Big Raw/Fixed toggle on trend graph - the demo moment) */}
-        <TheFixSection />
+        {/* Section 3: The Fix */}
+        <TheFixSection
+          selectedRegion={selectedRegion}
+          onSelectRegion={setSelectedRegion}
+        />
 
-        {/* Section 4: California (Daily calendar heatmap 2000-now + fire detail panel) */}
-        <CaliforniaSection />
+        {/* Section 4: Daily Fire Archive */}
+        <CaliforniaSection
+          selectedRegion={selectedRegion}
+          onSelectRegion={setSelectedRegion}
+        />
 
-        {/* Section 5: Proof (Exactly 3 numbers: jump before fix, jump after fix, share matching burned area) */}
-        <ProofSection />
+        {/* Section 5: Proof */}
+        <ProofSection
+          selectedRegion={selectedRegion}
+          onSelectRegion={setSelectedRegion}
+        />
       </main>
 
-      {/* Footer: Method paragraph, NASA FIRMS credit, both GitHub links, team name */}
+      {/* Footer */}
       <Footer />
-
     </div>
   );
 }

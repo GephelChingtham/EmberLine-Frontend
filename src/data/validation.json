@@ -2,7 +2,42 @@
   "sample": false,
   "jumpBeforeFix": "+134.3%",
   "jumpAfterFix": "+19.8%",
+  "rawStep2012Pct": "+303.0%",
+  "fixedStep2012Pct": "+149.3%",
   "burnedAreaMatchScore": null,
   "burnedAreaStatus": "Validation pending",
-  "notes": "Jump measured across 2011\u20132012 sensor transition in California. Burned-area record validation is currently pending verification against official ground perimeter records."
+  "byRegion": {
+    "california_west_us": {
+      "jumpBeforeFix": "+134.3%",
+      "jumpAfterFix": "+19.8%",
+      "rawStep2012Pct": "+303.0%",
+      "fixedStep2012Pct": "+149.3%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    },
+    "amazon": {
+      "jumpBeforeFix": "+209.3%",
+      "jumpAfterFix": "+32.4%",
+      "rawStep2012Pct": "+172.3%",
+      "fixedStep2012Pct": "+7.6%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    },
+    "australia": {
+      "jumpBeforeFix": "+171.3%",
+      "jumpAfterFix": "+26.6%",
+      "rawStep2012Pct": "+207.6%",
+      "fixedStep2012Pct": "+45.2%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    },
+    "canada_boreal": {
+      "jumpBeforeFix": "+241.8%",
+      "jumpAfterFix": "+60.2%",
+      "rawStep2012Pct": "+416.1%",
+      "fixedStep2012Pct": "+141.0%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    }
+  }
 }

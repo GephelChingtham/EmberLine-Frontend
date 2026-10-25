@@ -1,40 +1,32 @@
 {
   "regions": [
     {
-      "id": "california",
+      "id": "california_west_us",
       "name": "California",
+      "fullName": "California & West US",
       "isReady": true,
       "badge": "Active Archive"
     },
     {
       "id": "amazon",
       "name": "Amazon",
-      "isReady": false,
-      "badge": "coming soon"
+      "fullName": "Amazon Basin",
+      "isReady": true,
+      "badge": "Active Archive"
     },
     {
       "id": "australia",
       "name": "Australia",
-      "isReady": false,
-      "badge": "coming soon"
+      "fullName": "Australia",
+      "isReady": true,
+      "badge": "Active Archive"
     },
     {
-      "id": "siberia",
-      "name": "Siberia",
-      "isReady": false,
-      "badge": "coming soon"
-    },
-    {
-      "id": "central-southern-africa",
-      "name": "Central/Southern Africa",
-      "isReady": false,
-      "badge": "coming soon"
-    },
-    {
-      "id": "canada-boreal",
-      "name": "Canada boreal",
-      "isReady": false,
-      "badge": "coming soon"
+      "id": "canada_boreal",
+      "name": "Canada Boreal",
+      "fullName": "Canada Boreal",
+      "isReady": true,
+      "badge": "Active Archive"
     }
   ]
 }

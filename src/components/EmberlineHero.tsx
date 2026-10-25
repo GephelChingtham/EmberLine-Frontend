@@ -5,26 +5,28 @@
 
 import { useState } from 'react';
 import { Globe3D, GlobeMarker } from '@/components/ui/3d-globe';
-import { SampleBadge } from './SampleBadge';
 import { JargonTooltip } from './JargonTooltip';
+import regionsData from '../data/regions.json';
+import type { RegionId } from '../App';
 
 interface EmberlineHeroProps {
+  selectedRegion: RegionId;
+  onSelectRegion: (r: RegionId) => void;
+  activeRegionName: string;
   onExploreClick: () => void;
   onMethodClick: () => void;
   onCaliforniaClick: () => void;
   onProofClick: () => void;
 }
 
-// Halftone satellite dots: Big = MODIS 1km (#FC5000 / #B31B00), Small = VIIRS 375m (#FFB020 / #3FD0C9)
-const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
-  // California cluster (Sierra Nevada, Butte/Dixie, Central Valley, SoCal)
+const halftoneSatelliteMarkers: (GlobeMarker & { regionId?: RegionId })[] = [
   {
     lat: 39.865,
     lng: -121.235,
     label: "California: VIIRS 375m Detection",
     sensorType: 'VIIRS',
     color: '#FFB020',
-    isCalifornia: true,
+    regionId: 'california_west_us',
   },
   {
     lat: 37.865,
@@ -33,7 +35,7 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     sensorType: 'VIIRS',
     color: '#FC5000',
     isGlowing: true,
-    isCalifornia: true,
+    regionId: 'california_west_us',
   },
   {
     lat: 36.7783,
@@ -41,7 +43,7 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "California (Central Valley): MODIS 1km Grid",
     sensorType: 'MODIS',
     color: '#FC5000',
-    isCalifornia: true,
+    regionId: 'california_west_us',
   },
   {
     lat: 34.2,
@@ -49,15 +51,15 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "Southern California: MODIS 1km Detection",
     sensorType: 'MODIS',
     color: '#FC5000',
-    isCalifornia: true,
+    regionId: 'california_west_us',
   },
-  // Global reference fire basins
   {
     lat: -5.421,
     lng: -56.882,
     label: "Amazon Basin: MODIS 1km Grid",
     sensorType: 'MODIS',
     color: '#FC5000',
+    regionId: 'amazon',
   },
   {
     lat: -12.21,
@@ -65,13 +67,7 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "Amazon: VIIRS 375m Pixel",
     sensorType: 'VIIRS',
     color: '#FFB020',
-  },
-  {
-    lat: 38.2,
-    lng: 23.7,
-    label: "Mediterranean: VIIRS 375m Detection",
-    sensorType: 'VIIRS',
-    color: '#FFB020',
+    regionId: 'amazon',
   },
   {
     lat: -33.712,
@@ -79,6 +75,7 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "Australia: MODIS 1km Grid",
     sensorType: 'MODIS',
     color: '#FC5000',
+    regionId: 'australia',
   },
   {
     lat: -28.5,
@@ -86,13 +83,7 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "Australia: VIIRS 375m Detection",
     sensorType: 'VIIRS',
     color: '#FFB020',
-  },
-  {
-    lat: 62.035,
-    lng: 129.732,
-    label: "Siberia Taiga: MODIS 1km Grid",
-    sensorType: 'MODIS',
-    color: '#FC5000',
+    regionId: 'australia',
   },
   {
     lat: 53.5461,
@@ -100,17 +91,22 @@ const halftoneSatelliteMarkers: (GlobeMarker & { isCalifornia?: boolean })[] = [
     label: "Canada Boreal: VIIRS 375m Detection",
     sensorType: 'VIIRS',
     color: '#FFB020',
+    regionId: 'canada_boreal',
   },
   {
-    lat: -8.8,
-    lng: 24.5,
-    label: "Central Africa: MODIS 1km Grid",
+    lat: 58.2,
+    lng: -115.0,
+    label: "Canada Boreal: MODIS 1km Grid",
     sensorType: 'MODIS',
     color: '#FC5000',
+    regionId: 'canada_boreal',
   },
 ];
 
 export function EmberlineHero({
+  selectedRegion,
+  onSelectRegion,
+  activeRegionName,
   onExploreClick,
   onMethodClick,
   onCaliforniaClick,
@@ -122,7 +118,8 @@ export function EmberlineHero({
     const match = halftoneSatelliteMarkers.find(
       (m) => m.lat === marker.lat && m.lng === marker.lng
     );
-    if (match?.isCalifornia) {
+    if (match?.regionId) {
+      onSelectRegion(match.regionId);
       onCaliforniaClick();
     } else {
       onExploreClick();
@@ -131,10 +128,8 @@ export function EmberlineHero({
 
   return (
     <section className="w-full pt-6 pb-28 px-6 max-w-[1400px] mx-auto">
-      
-      {/* Top Nav: Basalt pill nav with dotted dividers, no duplicate Explore button */}
-      <header className="flex items-center justify-between gap-4 py-4 mb-16 border-b border-dotted border-[#26262B]">
-        
+      {/* Top Nav */}
+      <header className="flex flex-wrap items-center justify-between gap-4 py-4 mb-16 border-b border-dotted border-[#26262B]">
         {/* Brand */}
         <div className="flex items-center gap-2.5">
           <div className="w-[10px] h-[10px] rounded-full bg-[#FC5000]" aria-hidden="true"></div>
@@ -163,7 +158,7 @@ export function EmberlineHero({
             onClick={onCaliforniaClick}
             className="px-3 py-1 rounded-full text-[#F2EFE9] hover:bg-[#1E1E24] hover:text-white transition-colors cursor-pointer"
           >
-            California
+            {activeRegionName}
           </button>
           <span className="text-[#26262B]">·</span>
           <button
@@ -183,20 +178,30 @@ export function EmberlineHero({
           </a>
         </nav>
 
-        {/* Subtle Sample Badge in Nav */}
-        <div className="hidden sm:block">
-          <SampleBadge />
+        {/* Live Region Switcher Pill */}
+        <div className="flex items-center gap-1 bg-[#131316] p-1 rounded-full border border-dotted border-[#26262B]">
+          {regionsData.regions.map((r) => {
+            const active = r.id === selectedRegion;
+            return (
+              <button
+                key={r.id}
+                onClick={() => onSelectRegion(r.id as RegionId)}
+                className={`px-3 py-1 rounded-full text-[11px] font-mono-numbers uppercase tracking-wider transition-all cursor-pointer ${
+                  active
+                    ? 'bg-[#FC5000] text-white font-bold'
+                    : 'text-[#8A8A93] hover:text-[#F2EFE9]'
+                }`}
+              >
+                {r.name}
+              </button>
+            );
+          })}
         </div>
-
       </header>
 
       {/* Main Split Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-        
-        {/* Left Column: Headline (<= 6 words), One-line subtitle, One button */}
         <div className="lg:col-span-6 flex flex-col justify-center">
-          
-          {/* Headline: <= 6 words ("20 YEARS OF WILDFIRES. ONE TIMELINE.") */}
           <div className="mb-6">
             <h1 className="font-headline text-[clamp(48px,8.5vw,96px)] leading-[0.92] tracking-[0.015em] text-[#F2EFE9] uppercase">
               20 YEARS OF WILDFIRES.
@@ -206,13 +211,11 @@ export function EmberlineHero({
             </h1>
           </div>
 
-          {/* Subtitle: Exactly one line */}
           <p className="text-[16px] font-sans font-medium text-[#8A8A93] mb-8">
-            Two satellites, one fair fire record.
+            Two satellites, one fair fire record across 4 global fire basins.
           </p>
 
-          {/* Exactly one button */}
-          <div>
+          <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={onExploreClick}
               className="bg-[#FC5000] text-white hover:bg-[#e04700] text-[14px] font-sans font-semibold uppercase tracking-[0.04em] py-3.5 px-8 rounded-full transition-colors cursor-pointer"
@@ -220,14 +223,11 @@ export function EmberlineHero({
               Explore the Fix
             </button>
           </div>
-
         </div>
 
-        {/* Right Column: Globe + Dot Legend only */}
+        {/* Right Column: Globe */}
         <div className="lg:col-span-6">
           <div className="bg-[#131316] rounded-[40px] p-6 sm:p-7 relative flex flex-col items-center">
-            
-            {/* 3D Halftone Globe Canvas */}
             <div className="w-full h-[380px] sm:h-[440px] relative flex items-center justify-center">
               <Globe3D
                 markers={halftoneSatelliteMarkers}
@@ -249,7 +249,6 @@ export function EmberlineHero({
                 onMarkerHover={setHoveredMarker}
               />
 
-              {/* Minimal Hover Detail Pill */}
               {hoveredMarker && (
                 <div className="absolute bottom-3 left-3 bg-[#0A0A0C]/90 border border-dotted border-[#26262B] px-3 py-1.5 rounded-full pointer-events-none z-20 backdrop-blur-md flex items-center gap-2">
                   <span className="font-mono-numbers text-[10px] uppercase font-bold text-[#FC5000]">
@@ -263,7 +262,6 @@ export function EmberlineHero({
               )}
             </div>
 
-            {/* Sensor Pixel Halftone Legend (kept as the only needed globe explanation) */}
             <div className="w-full pt-4 mt-2 border-t border-dotted border-[#26262B] flex flex-wrap items-center justify-between gap-4 text-[12px] font-mono-numbers text-[#8A8A93] z-10">
               <div className="flex items-center gap-5">
                 <div className="flex items-center gap-2">
@@ -289,12 +287,9 @@ export function EmberlineHero({
                 about 7× smaller pixel area
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
-
     </section>
   );
 }

@@ -3,10 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import calendarData from '../data/calendar.json';
 import firesData from '../data/fires.json';
-import { SampleBadge } from './SampleBadge';
+import regionsData from '../data/regions.json';
+import type { RegionId } from '../App';
 
 interface FireEvent {
   id: string;
@@ -18,9 +19,14 @@ interface FireEvent {
   satellites: string[];
 }
 
-export function CaliforniaSection() {
-  const [selectedYear, setSelectedYear] = useState<number>(2021); // Default to Dixie Fire year
-  const [selectedFireId, setSelectedFireId] = useState<string>('ca-2021-0713');
+interface Props {
+  selectedRegion: RegionId;
+  onSelectRegion: (r: RegionId) => void;
+}
+
+export function CaliforniaSection({ selectedRegion, onSelectRegion }: Props) {
+  const [selectedYear, setSelectedYear] = useState<number>(2021);
+  const [selectedFireId, setSelectedFireId] = useState<string>('');
   const [hoveredDay, setHoveredDay] = useState<{
     date: string;
     count: number;
@@ -28,19 +34,29 @@ export function CaliforniaSection() {
     dayOfYear: number;
   } | null>(null);
 
-  const fires: FireEvent[] = firesData.fires;
+  const regionCal =
+    (calendarData as any).byRegion?.[selectedRegion] || calendarData;
+  const fires: FireEvent[] =
+    (firesData as any).byRegion?.[selectedRegion] || firesData.fires;
+
+  useEffect(() => {
+    if (fires.length > 0) {
+      setSelectedFireId(fires[0].id);
+      setSelectedYear(fires[0].year);
+    }
+  }, [selectedRegion]);
+
   const selectedFire = fires.find((f) => f.id === selectedFireId) || fires[0];
 
   const currentYearData =
-    calendarData.years.find((y) => y.year === selectedYear) ||
-    calendarData.years[calendarData.years.length - 1];
+    regionCal.years.find((y: any) => y.year === selectedYear) ||
+    regionCal.years[regionCal.years.length - 1];
 
   const handleSelectFire = (fire: FireEvent) => {
     setSelectedFireId(fire.id);
     setSelectedYear(fire.year);
   };
 
-  // Color ramp based on fire count: #B31B00 -> #FC5000 -> #FFB020 -> #FFF3C4
   const getCellColor = (count: number) => {
     if (count === 0) return '#1A1A1E';
     if (count < 20) return '#4A1508';
@@ -61,27 +77,36 @@ export function CaliforniaSection() {
 
   return (
     <section id="california" className="w-full py-28 px-6 max-w-[1400px] mx-auto border-t border-dotted border-[#26262B]">
-      
-      {/* Header with 6-word headline & SAMPLE DATA badge */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
         <h2 className="font-headline text-[clamp(40px,6vw,72px)] leading-[0.94] text-[#F2EFE9] uppercase">
-          CALIFORNIA DAILY FIRE ARCHIVE.
+          {regionCal.region} DAILY FIRE ARCHIVE.
         </h2>
-        {(calendarData.sample || firesData.sample) && <SampleBadge />}
+
+        {/* Region Switcher */}
+        <div className="flex items-center gap-1 bg-[#131316] p-1 rounded-full border border-dotted border-[#26262B]">
+          {regionsData.regions.map((r) => (
+            <button
+              key={r.id}
+              onClick={() => onSelectRegion(r.id as RegionId)}
+              className={`px-3 py-1 rounded-full text-[11px] font-mono-numbers uppercase transition-all cursor-pointer ${
+                r.id === selectedRegion
+                  ? 'bg-[#FC5000] text-white font-bold'
+                  : 'text-[#8A8A93] hover:text-[#F2EFE9]'
+              }`}
+            >
+              {r.name}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* One-line statement */}
       <p className="text-[16px] font-sans font-medium text-[#8A8A93] mb-10">
-        25 years of daily satellite fire detections, 2000 to now.
+        {regionCal.endYear - regionCal.startYear + 1} years of daily satellite fire detections, {regionCal.startYear} to {regionCal.endYear}.
       </p>
 
-      {/* Main Grid: Calendar Heatmap + Fire List & Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
         {/* Left Column: Calendar Heatmap */}
         <div className="lg:col-span-8 bg-[#131316] p-6 sm:p-8 rounded-[40px]">
-          
-          {/* Year Header & Quick Year Pills */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-4 mb-6 border-b border-dotted border-[#26262B]">
             <div className="flex items-center gap-3">
               <span className="font-mono-numbers text-[28px] font-bold text-[#F2EFE9]">
@@ -92,7 +117,6 @@ export function CaliforniaSection() {
               </span>
             </div>
 
-            {/* Quick Year Selector Pills */}
             <div className="flex flex-wrap items-center gap-1.5 bg-[#0A0A0C] p-1.5 rounded-full border border-dotted border-[#26262B] text-[12px] font-mono-numbers">
               {[2003, 2009, 2013, 2017, 2018, 2020, 2021, 2024].map((yr) => (
                 <button
@@ -110,24 +134,22 @@ export function CaliforniaSection() {
             </div>
           </div>
 
-          {/* Year Range Slider */}
           <div className="mb-6 flex items-center gap-4">
-            <span className="text-[11px] font-mono-numbers text-[#8A8A93]">2000</span>
+            <span className="text-[11px] font-mono-numbers text-[#8A8A93]">{regionCal.startYear}</span>
             <input
               type="range"
-              min={calendarData.startYear}
-              max={calendarData.endYear}
+              min={regionCal.startYear}
+              max={regionCal.endYear}
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="flex-1 accent-[#FC5000] cursor-pointer"
             />
-            <span className="text-[11px] font-mono-numbers text-[#8A8A93]">2024</span>
+            <span className="text-[11px] font-mono-numbers text-[#8A8A93]">{regionCal.endYear}</span>
           </div>
 
-          {/* Daily Calendar Heatmap Matrix */}
           <div className="w-full mb-6">
             <div className="grid grid-cols-[repeat(auto-fill,minmax(12px,1fr))] sm:grid-cols-26 md:grid-cols-31 gap-1.5 p-3 bg-[#0A0A0C] rounded-[20px]">
-              {currentYearData.days.map((day) => {
+              {currentYearData.days.map((day: any) => {
                 const isSelectedFireActive = isFireDay(day.date);
                 return (
                   <div
@@ -145,7 +167,6 @@ export function CaliforniaSection() {
             </div>
           </div>
 
-          {/* Color ramp and active hovered readout */}
           <div className="pt-4 border-t border-dotted border-[#26262B] flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono-numbers text-[#8A8A93]">
             <div className="flex items-center gap-1.5">
               <span>Low</span>
@@ -167,21 +188,18 @@ export function CaliforniaSection() {
               )}
             </div>
           </div>
-
         </div>
 
-        {/* Right Column: Fire List & Fire Detail Panel */}
+        {/* Right Column: Fire List & Detail */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-          
-          {/* Notable fires list (matched by date) */}
           <div className="bg-[#131316] p-6 rounded-[32px]">
             <div className="pb-3 mb-3 border-b border-dotted border-[#26262B] text-[11px] font-mono-numbers uppercase text-[#8A8A93]">
-              Notable fires (matched by date)
+              Notable fires in {regionCal.region} (top {fires.length})
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 max-h-[340px] overflow-y-auto pr-1">
               {fires.map((fire) => {
-                const isSelected = fire.id === selectedFireId;
+                const isSelected = fire.id === selectedFire?.id;
                 return (
                   <button
                     key={fire.id}
@@ -193,7 +211,7 @@ export function CaliforniaSection() {
                     }`}
                   >
                     <div>
-                      <div className="font-sans font-medium text-[14px] text-[#F2EFE9]">
+                      <div className="font-sans font-medium text-[13px] text-[#F2EFE9]">
                         {fire.name}
                       </div>
                       <div className="text-[10px] font-mono-numbers text-[#8A8A93]">
@@ -209,13 +227,11 @@ export function CaliforniaSection() {
             </div>
           </div>
 
-          {/* Selected Fire Detail: Start, Peak, End, Satellites and nothing else */}
           {selectedFire && (
             <div className="bg-[#131316] p-6 rounded-[32px]">
-              
               <div className="pb-3 mb-4 border-b border-dotted border-[#26262B] flex items-center justify-between">
                 <div>
-                  <h3 className="font-headline text-[24px] text-[#F2EFE9] uppercase leading-none">
+                  <h3 className="font-headline text-[22px] text-[#F2EFE9] uppercase leading-none">
                     {selectedFire.name}
                   </h3>
                   <span className="text-[10px] font-mono-numbers text-[#8A8A93]">
@@ -227,7 +243,6 @@ export function CaliforniaSection() {
                 </span>
               </div>
 
-              {/* Start, Peak, End */}
               <div className="space-y-2 mb-4 font-mono-numbers text-[12px]">
                 <div className="flex items-center justify-between p-2.5 bg-[#0A0A0C] rounded-[10px]">
                   <span className="text-[#8A8A93] uppercase">Start</span>
@@ -245,7 +260,6 @@ export function CaliforniaSection() {
                 </div>
               </div>
 
-              {/* Satellites */}
               <div>
                 <span className="text-[10px] font-mono-numbers uppercase text-[#8A8A93] block mb-2">
                   Satellites
@@ -261,14 +275,10 @@ export function CaliforniaSection() {
                   ))}
                 </div>
               </div>
-
             </div>
           )}
-
         </div>
-
       </div>
-
     </section>
   );
 }
