@@ -21,6 +21,16 @@ interface EmberlineHeroProps {
 
 const halftoneSatelliteMarkers: (GlobeMarker & { regionId?: RegionId })[] = [
   {
+    lat: 21.75,
+    lng: 83.0,
+    label: "India (Central/East): MODIS 1km & VIIRS 375m",
+    sensorType: 'VIIRS',
+    color: '#FC5000',
+    isGlowing: true,
+    regionId: 'india',
+  },
+
+  {
     lat: 39.865,
     lng: -121.235,
     label: "California: VIIRS 375m Detection",
@@ -180,7 +190,7 @@ export function EmberlineHero({
 
         {/* Live Region Switcher Pill */}
         <div className="flex items-center gap-1 bg-[#131316] p-1 rounded-full border border-dotted border-[#26262B]">
-          {regionsData.regions.map((r) => {
+          {regionsData.regions.filter((r: any) => r.isReady).map((r: any) => {
             const active = r.id === selectedRegion;
             return (
               <button

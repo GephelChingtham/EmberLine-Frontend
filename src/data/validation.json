@@ -31,6 +31,14 @@
       "burnedAreaMatchScore": null,
       "burnedAreaStatus": "Validation pending"
     },
+    "india": {
+      "jumpBeforeFix": "+406.8%",
+      "jumpAfterFix": "+36.9%",
+      "rawStep2012Pct": "+409.6%",
+      "fixedStep2012Pct": "+26.8%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    },
     "canada_boreal": {
       "jumpBeforeFix": "+241.8%",
       "jumpAfterFix": "+60.2%",

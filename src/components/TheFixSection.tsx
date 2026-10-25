@@ -145,7 +145,7 @@ export function TheFixSection({ selectedRegion, onSelectRegion }: Props) {
           </div>
 
           <div className="flex items-center gap-1">
-            {regionsData.regions.map((r) => (
+            {regionsData.regions.filter((r: any) => r.isReady).map((r: any) => (
               <button
                 key={r.id}
                 onClick={() => onSelectRegion(r.id as RegionId)}

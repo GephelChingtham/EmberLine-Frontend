@@ -34,7 +34,7 @@ export function ProofSection({ selectedRegion, onSelectRegion }: Props) {
 
         {/* Region Switcher */}
         <div className="flex items-center gap-1 bg-[#131316] p-1 rounded-full border border-dotted border-[#26262B]">
-          {regionsData.regions.map((r) => (
+          {regionsData.regions.filter((r: any) => r.isReady).map((r: any) => (
             <button
               key={r.id}
               onClick={() => onSelectRegion(r.id as RegionId)}
