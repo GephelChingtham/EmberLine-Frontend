@@ -5,6 +5,15 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+  preview: {
+    allowedHosts: true,
+    host: '0.0.0.0',
+  },
+  server: {
+    allowedHosts: true,
+    host: '0.0.0.0',
+  },
+
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
