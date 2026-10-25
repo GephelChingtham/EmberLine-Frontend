@@ -1,0 +1,33 @@
+{
+  "sample": true,
+  "description": "Annual wildfire detections in California (2000-2024), comparing raw multi-sensor telemetry to Emberline harmonized timeline.",
+  "sensorPixelAreaRatio": "about 7× smaller pixel area",
+  "jumpYear": 2012,
+  "timeline": [
+    { "year": 2000, "raw": 4210, "fixed": 4190, "sensor": "MODIS" },
+    { "year": 2001, "raw": 4530, "fixed": 4480, "sensor": "MODIS" },
+    { "year": 2002, "raw": 4820, "fixed": 4760, "sensor": "MODIS" },
+    { "year": 2003, "raw": 6120, "fixed": 6050, "sensor": "MODIS" },
+    { "year": 2004, "raw": 4150, "fixed": 4120, "sensor": "MODIS" },
+    { "year": 2005, "raw": 3980, "fixed": 3950, "sensor": "MODIS" },
+    { "year": 2006, "raw": 5340, "fixed": 5290, "sensor": "MODIS" },
+    { "year": 2007, "raw": 5890, "fixed": 5810, "sensor": "MODIS" },
+    { "year": 2008, "raw": 7420, "fixed": 7350, "sensor": "MODIS" },
+    { "year": 2009, "raw": 4610, "fixed": 4580, "sensor": "MODIS" },
+    { "year": 2010, "raw": 3820, "fixed": 3810, "sensor": "MODIS" },
+    { "year": 2011, "raw": 4980, "fixed": 4950, "sensor": "MODIS" },
+    { "year": 2012, "raw": 15640, "fixed": 5040, "sensor": "VIIRS launch + MODIS", "isJump": true },
+    { "year": 2013, "raw": 16210, "fixed": 5220, "sensor": "VIIRS + MODIS" },
+    { "year": 2014, "raw": 17890, "fixed": 5760, "sensor": "VIIRS + MODIS" },
+    { "year": 2015, "raw": 18450, "fixed": 5940, "sensor": "VIIRS + MODIS" },
+    { "year": 2016, "raw": 16920, "fixed": 5450, "sensor": "VIIRS + MODIS" },
+    { "year": 2017, "raw": 24800, "fixed": 7980, "sensor": "VIIRS + MODIS" },
+    { "year": 2018, "raw": 28410, "fixed": 9140, "sensor": "VIIRS + MODIS" },
+    { "year": 2019, "raw": 15300, "fixed": 4920, "sensor": "VIIRS + MODIS" },
+    { "year": 2020, "raw": 41200, "fixed": 13260, "sensor": "VIIRS + MODIS" },
+    { "year": 2021, "raw": 32800, "fixed": 10550, "sensor": "VIIRS + MODIS" },
+    { "year": 2022, "raw": 18100, "fixed": 5820, "sensor": "VIIRS + MODIS" },
+    { "year": 2023, "raw": 14200, "fixed": 4570, "sensor": "VIIRS + MODIS" },
+    { "year": 2024, "raw": 21600, "fixed": 6950, "sensor": "VIIRS + MODIS" }
+  ]
+}

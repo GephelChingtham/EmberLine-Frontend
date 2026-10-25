@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Caldera Dark-Tuned Palette */
+    --canvas-bg: #0A0A0C;
+    --card-bg: #131316;
+    --card-panel: #131316;
+    --border-dotted: #26262B;
+    --border-solid: #26262B;
+    
+    /* Text */
+    --text-bone: #F2EFE9;
+    --text-ash: #8A8A93;
+    
+    /* Fire Data ONLY */
+    --fire-ember: #FC5000;
+    --fire-deep: #B31B00;
+    --fire-warm: #FFB020;
+    --fire-pale: #FFF3C4;
+    
+    /* Data States */
+    --data-raw: #6E6E78;
+    --data-fixed: #FC5000;
+    
+    /* Accents (Only two) */
+    --satellite-teal: #3FD0C9;
+    --tag-sulfur: #F5F28E;
+  }
+
+  html {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0A0A0C;
+    color: #F2EFE9;
+  }
+
+  body {
+    background-color: #0A0A0C;
+    color: #F2EFE9;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    overflow-x: hidden;
+  }
+}
+
+/* Typography Tokens */
+.font-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-mono-numbers {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zero shadows rule as strictly requested */
+*, *::before, *::after {
+  box-shadow: none !important;
+}
+
+/* Halftone dot pattern */
+.halftone-bg {
+  background-image: radial-gradient(circle, #26262B 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+/* Fire gradient ramp */
+.fire-gradient {
+  background: linear-gradient(97.13deg, #B31B00 0%, #FC5000 45%, #FFB020 85%, #FFF3C4 100%);
+}

@@ -1,0 +1,40 @@
+{
+  "regions": [
+    {
+      "id": "california",
+      "name": "California",
+      "isReady": true,
+      "badge": "Active Archive"
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "isReady": false,
+      "badge": "coming soon"
+    },
+    {
+      "id": "australia",
+      "name": "Australia",
+      "isReady": false,
+      "badge": "coming soon"
+    },
+    {
+      "id": "siberia",
+      "name": "Siberia",
+      "isReady": false,
+      "badge": "coming soon"
+    },
+    {
+      "id": "central-southern-africa",
+      "name": "Central/Southern Africa",
+      "isReady": false,
+      "badge": "coming soon"
+    },
+    {
+      "id": "canada-boreal",
+      "name": "Canada boreal",
+      "isReady": false,
+      "badge": "coming soon"
+    }
+  ]
+}

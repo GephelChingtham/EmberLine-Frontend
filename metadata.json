@@ -1,0 +1,6 @@
+{
+  "name": "Emberline — 20 Years of Wildfires. One Clean Timeline.",
+  "description": "Merging NASA's MODIS and VIIRS satellite fire data into one calibrated timeline. The fake 2012 jump disappears.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
