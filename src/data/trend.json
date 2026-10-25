@@ -1,33 +1,171 @@
 {
-  "sample": true,
-  "description": "Annual wildfire detections in California (2000-2024), comparing raw multi-sensor telemetry to Emberline harmonized timeline.",
-  "sensorPixelAreaRatio": "about 7× smaller pixel area",
+  "sample": false,
+  "description": "Annual wildfire detections in California (cell-days), comparing raw multi-sensor telemetry to Emberline harmonized timeline.",
+  "sensorPixelAreaRatio": "about 7\u00d7 smaller pixel area",
   "jumpYear": 2012,
+  "unit": "cell_days",
   "timeline": [
-    { "year": 2000, "raw": 4210, "fixed": 4190, "sensor": "MODIS" },
-    { "year": 2001, "raw": 4530, "fixed": 4480, "sensor": "MODIS" },
-    { "year": 2002, "raw": 4820, "fixed": 4760, "sensor": "MODIS" },
-    { "year": 2003, "raw": 6120, "fixed": 6050, "sensor": "MODIS" },
-    { "year": 2004, "raw": 4150, "fixed": 4120, "sensor": "MODIS" },
-    { "year": 2005, "raw": 3980, "fixed": 3950, "sensor": "MODIS" },
-    { "year": 2006, "raw": 5340, "fixed": 5290, "sensor": "MODIS" },
-    { "year": 2007, "raw": 5890, "fixed": 5810, "sensor": "MODIS" },
-    { "year": 2008, "raw": 7420, "fixed": 7350, "sensor": "MODIS" },
-    { "year": 2009, "raw": 4610, "fixed": 4580, "sensor": "MODIS" },
-    { "year": 2010, "raw": 3820, "fixed": 3810, "sensor": "MODIS" },
-    { "year": 2011, "raw": 4980, "fixed": 4950, "sensor": "MODIS" },
-    { "year": 2012, "raw": 15640, "fixed": 5040, "sensor": "VIIRS launch + MODIS", "isJump": true },
-    { "year": 2013, "raw": 16210, "fixed": 5220, "sensor": "VIIRS + MODIS" },
-    { "year": 2014, "raw": 17890, "fixed": 5760, "sensor": "VIIRS + MODIS" },
-    { "year": 2015, "raw": 18450, "fixed": 5940, "sensor": "VIIRS + MODIS" },
-    { "year": 2016, "raw": 16920, "fixed": 5450, "sensor": "VIIRS + MODIS" },
-    { "year": 2017, "raw": 24800, "fixed": 7980, "sensor": "VIIRS + MODIS" },
-    { "year": 2018, "raw": 28410, "fixed": 9140, "sensor": "VIIRS + MODIS" },
-    { "year": 2019, "raw": 15300, "fixed": 4920, "sensor": "VIIRS + MODIS" },
-    { "year": 2020, "raw": 41200, "fixed": 13260, "sensor": "VIIRS + MODIS" },
-    { "year": 2021, "raw": 32800, "fixed": 10550, "sensor": "VIIRS + MODIS" },
-    { "year": 2022, "raw": 18100, "fixed": 5820, "sensor": "VIIRS + MODIS" },
-    { "year": 2023, "raw": 14200, "fixed": 4570, "sensor": "VIIRS + MODIS" },
-    { "year": 2024, "raw": 21600, "fixed": 6950, "sensor": "VIIRS + MODIS" }
+    {
+      "year": 2000,
+      "raw": 395.0,
+      "fixed": 89.11,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2001,
+      "raw": 2717.0,
+      "fixed": 1559.4,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2002,
+      "raw": 5731.0,
+      "fixed": 2387.39,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2003,
+      "raw": 8217.0,
+      "fixed": 3358.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2004,
+      "raw": 4958.0,
+      "fixed": 1351.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2005,
+      "raw": 4020.0,
+      "fixed": 992.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2006,
+      "raw": 8369.0,
+      "fixed": 3130.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2007,
+      "raw": 9134.0,
+      "fixed": 4754.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2008,
+      "raw": 15842.0,
+      "fixed": 5313.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2009,
+      "raw": 6066.0,
+      "fixed": 2540.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2010,
+      "raw": 2340.0,
+      "fixed": 601.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2011,
+      "raw": 2966.0,
+      "fixed": 759.0,
+      "sensor": "MODIS"
+    },
+    {
+      "year": 2012,
+      "raw": 14575.0,
+      "fixed": 3312.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2013,
+      "raw": 16400.0,
+      "fixed": 3671.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2014,
+      "raw": 14856.0,
+      "fixed": 2740.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2015,
+      "raw": 22018.0,
+      "fixed": 3703.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2016,
+      "raw": 15152.0,
+      "fixed": 3286.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2017,
+      "raw": 29322.0,
+      "fixed": 6228.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2018,
+      "raw": 36434.0,
+      "fixed": 8274.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2019,
+      "raw": 16108.0,
+      "fixed": 1818.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2020,
+      "raw": 90273.0,
+      "fixed": 22151.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2021,
+      "raw": 72814.0,
+      "fixed": 18554.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2022,
+      "raw": 19263.0,
+      "fixed": 2237.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2023,
+      "raw": 22917.0,
+      "fixed": 1986.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2024,
+      "raw": 23771.0,
+      "fixed": 4691.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2025,
+      "raw": 19390.0,
+      "fixed": 3030.0,
+      "sensor": "MODIS + VIIRS"
+    },
+    {
+      "year": 2026,
+      "raw": 14205.0,
+      "fixed": 1310.0,
+      "sensor": "MODIS + VIIRS"
+    }
   ]
 }

@@ -1,8 +1,8 @@
 {
-  "sample": true,
-  "jumpBeforeFix": "+214%",
-  "jumpAfterFix": "+1.8%",
+  "sample": false,
+  "jumpBeforeFix": "+134.3%",
+  "jumpAfterFix": "+19.8%",
   "burnedAreaMatchScore": null,
   "burnedAreaStatus": "Validation pending",
-  "notes": "Jump measured across 2011–2012 sensor transition in California. Burned-area record validation is currently pending verification against official ground perimeter records."
+  "notes": "Jump measured across 2011\u20132012 sensor transition in California. Burned-area record validation is currently pending verification against official ground perimeter records."
 }
