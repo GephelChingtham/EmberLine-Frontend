@@ -13,10 +13,17 @@ import { ProofSection } from './components/ProofSection';
 import { Footer } from './components/Footer';
 import regionsData from './data/regions.json';
 
-export type RegionId = 'california_west_us' | 'amazon' | 'australia' | 'canada_boreal' | 'india' | 'central_southern_africa';
+export type RegionId =
+  | 'california_west_us'
+  | 'amazon'
+  | 'australia'
+  | 'canada_boreal'
+  | 'india'
+  | 'malaysia';
 
 export default function App() {
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('california_west_us');
+  const [simpleView, setSimpleView] = useState<boolean>(false);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -36,37 +43,47 @@ export default function App() {
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
           activeRegionName={activeRegionObj.name}
+          simpleView={simpleView}
+          onToggleSimpleView={() => setSimpleView((prev) => !prev)}
           onExploreClick={() => scrollTo('the-fix')}
           onMethodClick={() => scrollTo('the-problem')}
           onCaliforniaClick={() => scrollTo('california')}
           onProofClick={() => scrollTo('proof')}
         />
 
-        {/* Slim Strip: In plain words */}
-        <PlainWordsStrip />
+        {/* Simplified Guide Section for Normal People */}
+        <PlainWordsStrip
+          selectedRegion={selectedRegion}
+          simpleView={simpleView}
+          onToggleSimpleView={() => setSimpleView((prev) => !prev)}
+        />
 
         {/* Section 2: The Problem */}
         <TheProblemSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 3: The Fix */}
         <TheFixSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 4: Daily Fire Archive */}
         <CaliforniaSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 5: Proof */}
         <ProofSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
       </main>
 

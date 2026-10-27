@@ -91,22 +91,22 @@
       "badge": "Active Archive"
     },
     {
-      "id": "central_southern_africa",
-      "name": "Africa",
-      "fullName": "Central/Southern Africa",
+      "id": "malaysia",
+      "name": "Malaysia",
+      "fullName": "Malaysia",
       "center": [
-        26.0,
-        -12.5
+        111.87,
+        2.84
       ],
       "bbox": [
-        10.0,
-        -30.0,
-        42.0,
-        5.0
+        99.6,
+        0.8,
+        119.3,
+        7.4
       ],
-      "status": "pending",
-      "isReady": false,
-      "badge": "Pending"
+      "status": "ready",
+      "isReady": true,
+      "badge": "Active Archive"
     }
   ]
 }
