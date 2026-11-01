@@ -13,10 +13,18 @@ import { ProofSection } from './components/ProofSection';
 import { Footer } from './components/Footer';
 import regionsData from './data/regions.json';
 
-export type RegionId = 'california_west_us' | 'amazon' | 'australia' | 'canada_boreal' | 'india' | 'malaysia' | 'central_southern_africa';
+export type RegionId =
+  | 'california_west_us'
+  | 'amazon'
+  | 'australia'
+  | 'canada_boreal'
+  | 'india'
+  | 'malaysia'
+  | 'central_southern_africa';
 
 export default function App() {
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('california_west_us');
+  const [simpleView, setSimpleView] = useState<boolean>(false);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -26,7 +34,8 @@ export default function App() {
   };
 
   const activeRegionObj =
-    regionsData.regions.find((r) => r.id === selectedRegion) || regionsData.regions[0];
+    regionsData.regions.find((r) => r.id === selectedRegion) ||
+    regionsData.regions[0];
 
   return (
     <div className="min-h-screen bg-[#0A0A0C] text-[#F2EFE9] flex flex-col font-sans antialiased selection:bg-[#FC5000] selection:text-white">
@@ -36,6 +45,8 @@ export default function App() {
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
           activeRegionName={activeRegionObj.name}
+          simpleView={simpleView}
+          onToggleSimpleView={() => setSimpleView((prev) => !prev)}
           onExploreClick={() => scrollTo('the-fix')}
           onMethodClick={() => scrollTo('the-problem')}
           onCaliforniaClick={() => scrollTo('california')}
@@ -43,30 +54,34 @@ export default function App() {
         />
 
         {/* Slim Strip: In plain words */}
-        <PlainWordsStrip />
+        <PlainWordsStrip simpleView={simpleView} />
 
         {/* Section 2: The Problem */}
         <TheProblemSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 3: The Fix */}
         <TheFixSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 4: Daily Fire Archive */}
         <CaliforniaSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
 
         {/* Section 5: Proof */}
         <ProofSection
           selectedRegion={selectedRegion}
           onSelectRegion={setSelectedRegion}
+          simpleView={simpleView}
         />
       </main>
 
