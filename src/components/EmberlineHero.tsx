@@ -21,6 +21,16 @@ interface EmberlineHeroProps {
 
 const halftoneSatelliteMarkers: (GlobeMarker & { regionId?: RegionId })[] = [
   {
+    lat: 4.15,
+    lng: 109.5,
+    label: "Malaysia: MODIS 1km & VIIRS 375m",
+    sensorType: 'VIIRS',
+    color: '#FC5000',
+    isGlowing: true,
+    regionId: 'malaysia',
+  },
+
+  {
     lat: 21.75,
     lng: 83.0,
     label: "India (Central/East): MODIS 1km & VIIRS 375m",
@@ -222,7 +232,7 @@ export function EmberlineHero({
           </div>
 
           <p className="text-[16px] font-sans font-medium text-[#8A8A93] mb-8">
-            Two satellites, one fair fire record across 4 global fire basins.
+            Two satellites, one fair fire record across 6 global fire basins.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">

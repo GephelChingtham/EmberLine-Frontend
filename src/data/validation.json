@@ -39,6 +39,14 @@
       "burnedAreaMatchScore": null,
       "burnedAreaStatus": "Validation pending"
     },
+    "malaysia": {
+      "jumpBeforeFix": "+302.9%",
+      "jumpAfterFix": "+25.5%",
+      "rawStep2012Pct": "+294.9%",
+      "fixedStep2012Pct": "+4.3%",
+      "burnedAreaMatchScore": null,
+      "burnedAreaStatus": "Validation pending"
+    },
     "canada_boreal": {
       "jumpBeforeFix": "+241.8%",
       "jumpAfterFix": "+60.2%",

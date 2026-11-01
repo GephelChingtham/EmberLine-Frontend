@@ -13,7 +13,7 @@ import { ProofSection } from './components/ProofSection';
 import { Footer } from './components/Footer';
 import regionsData from './data/regions.json';
 
-export type RegionId = 'california_west_us' | 'amazon' | 'australia' | 'canada_boreal' | 'india' | 'central_southern_africa';
+export type RegionId = 'california_west_us' | 'amazon' | 'australia' | 'canada_boreal' | 'india' | 'malaysia' | 'central_southern_africa';
 
 export default function App() {
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('california_west_us');
